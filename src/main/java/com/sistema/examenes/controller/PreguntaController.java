@@ -19,11 +19,11 @@ public class PreguntaController {
     @Autowired
     private ExamenService examenService;
     @PostMapping("/")
-    public ResponseEntity<?> guardarPregunta(@RequestBody Pregunta pregunta){
+    public ResponseEntity<Pregunta> guardarPregunta(@RequestBody Pregunta pregunta){
         return ResponseEntity.ok(preguntaService.agregarPregunta(pregunta));
     }
-    @PutMapping("")
-    public ResponseEntity<?> actualizarPregunta(@RequestBody Pregunta pregunta){
+    @PutMapping("/")
+    public ResponseEntity<Pregunta> actualizarPregunta(@RequestBody Pregunta pregunta){
         return ResponseEntity.ok(preguntaService.actualizarPregunta(pregunta));
     }
     @GetMapping("/examen/{examenId}")
