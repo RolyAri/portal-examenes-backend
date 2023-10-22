@@ -45,4 +45,33 @@ public class PreguntaController {
     public void eliminarPregunta(@PathVariable("preguntaId") Long preguntaId){
         preguntaService.eliminarPregunta(preguntaId);
     }
+    @GetMapping("/examen/todos/{examenId}")
+    public ResponseEntity<?> ListarPreguntasDelExamenComoAdministrador(@PathVariable("examenId") Long examenId){
+        Examen examen = new Examen();
+        examen.setExamenId(examenId);
+        Set<Pregunta> preguntas = preguntaService.obtenerPreguntasDelExamen(examen);
+        return ResponseEntity.ok(preguntas);
+    }
+    @PostMapping("/evaluar-examen")
+    public ResponseEntity<?> evaluarExamen(@RequestBody List<Pregunta> preguntas){
+        double puntosMaximos = 0;
+        Integer respuestasCorrectas = 0;
+        Integer intentos = 0;
+        for (Pregunta p:preguntas){
+            Pregunta pregunta = this.preguntaService.listarPregunta(p.getPreguntaID());
+            if (pregunta.getRespuesta().equals(p.getRespuestaDada())){
+                respuestasCorrectas++;
+                double puntos = Double.parseDouble(preguntas.get(0).getExamen().getPuntosMaximos())/preguntas.size();
+                puntosMaximos += puntos;
+            }
+            if (p.getRespuestaDada() != null){
+
+            }
+        }
+        Map<String, Object> respuestas = new HashMap<>();
+        respuestas.put("puntosMaximos",puntosMaximos);
+        respuestas.put("respuestasCorrectas",respuestasCorrectas);
+        respuestas.put("intentos",intentos);
+        return ResponseEntity.ok(respuestas);
+    }
 }

@@ -45,4 +45,9 @@ public class PreguntaServiceImpl implements PreguntaService{
         preguntaRepository.delete(pregunta);*/
         preguntaRepository.deleteById(preguntaId);
     }
+
+    @Override
+    public Pregunta listarPregunta(Long preguntaId) {
+        return this.preguntaRepository.getOne(preguntaId);
+    }
 }

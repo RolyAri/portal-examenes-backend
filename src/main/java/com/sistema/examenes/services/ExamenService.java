@@ -1,7 +1,9 @@
 package com.sistema.examenes.services;
 
+import com.sistema.examenes.entities.Categoria;
 import com.sistema.examenes.entities.Examen;
 
+import java.util.List;
 import java.util.Set;
 
 public interface ExamenService {
@@ -10,4 +12,7 @@ public interface ExamenService {
     Set<Examen> obtenerExamenes();
     Examen obtenerExamen(Long examenId);
     void eliminarExamen(Long examenId);
+    List<Examen> listarExamenesDeUnaCategoria(Categoria categoria);
+    List<Examen> obtenerExamenesActivos();
+    List<Examen> obtenerExamenesActivosDeUnaCategoria(Categoria categoria);
 }
